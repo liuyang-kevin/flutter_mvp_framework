@@ -1,4 +1,4 @@
-import 'bubble_data.dart';
+import 'capsule_data.dart';
 import 'bubble_data_ai_editor.dart';
 import 'bubble_data_mock.dart';
 
@@ -20,7 +20,7 @@ class Injector {
     return _singleton;
   }
   //获取ContactRepository实例
-  BubbleRepo get contactRepository {
+  DataRepo get contactRepository {
     switch (_flavor) {
       case Flavor.MOCK:
         return new MockContactRepository();

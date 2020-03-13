@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'bubble_data.dart';
+import 'capsule_data.dart';
 
-class MockContactRepository implements BubbleRepo {
+class MockContactRepository implements DataRepo {
   @override
   Future<List<Contact>> fetch() => Future.value(kContacts);
 }

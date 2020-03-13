@@ -11,7 +11,7 @@ class Contact {
         email = map['email'];
 }
 
-abstract class BubbleRepo {
+abstract class DataRepo {
   Future<List<Contact>> fetch();
 }
 

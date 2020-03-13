@@ -1,9 +1,9 @@
-import 'package:cmd_behavioral/mvp/data/bubble_data.dart';
+import 'package:cmd_behavioral/mvp/data/capsule_data.dart';
 import 'package:cmd_behavioral/mvp/presenter/bubble_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-typedef IC ItemCreator<IC>(ViewContract);
+typedef IC ItemCreator<IC>(view);
 
 abstract class BubbleLayerState<W extends StatefulWidget, P extends BubbleLayerPresenter> extends State<W>
     implements ViewContract {

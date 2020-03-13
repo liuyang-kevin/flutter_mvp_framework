@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'bubble_data.dart';
+import 'capsule_data.dart';
 
-class RandomUserRepository implements BubbleRepo {
+class RandomUserRepository implements DataRepo {
   static const _kRandomUserUrl = 'http://api.randomuser.me/?results=15';
   final JsonDecoder _decoder = new JsonDecoder();
 
