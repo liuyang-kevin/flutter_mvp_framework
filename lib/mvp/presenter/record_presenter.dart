@@ -8,14 +8,9 @@ class RecordLayerPresenter extends BubbleLayerPresenter {
 
 
 class RecordRepo extends BubbleRepo {
-  static const kContacts = const <Contact>[
-    const Contact(
-        fullName: 'Romain Hoogmoed', email: 'romain.hoogmoed@example.com'),
-    const Contact(fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com')
-  ];
 
   @override
   Future<List<Contact>> fetch() {
-    return Future.value(kContacts);
+    return super.fetch();
   }
 }

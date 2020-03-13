@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'package:cmd_behavioral/mvp/data/bubble_data_injector.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:cmd_behavioral/mvp/data/capsule_data.dart';
 
 abstract class ViewContract {
@@ -8,34 +12,48 @@ abstract class ViewContract {
 
 typedef RC RepoCreator<RC>();
 
-class BubbleLayerPresenter<R extends DataRepo>  {
+class BubbleLayerPresenter<R extends DataRepo> {
   ViewContract _view;
   RepoCreator<R> _creator;
   R _Repo;
 
-  BubbleLayerPresenter(this._view, this._creator){
+  BubbleLayerPresenter(this._view, this._creator) {
     _Repo = _creator();
     print("BubbleLayerPresenter Repo ->${_Repo.runtimeType}");
   }
 
   void loadContacts() {
     assert(_view != null);
-    _Repo
-        .fetch()
+    _Repo.fetch()
         .then((contacts) => _view.onLoadContactsComplete(contacts))
         .catchError((onError) => _view.onLoadContactsError());
   }
 }
 
 class BubbleRepo extends DataRepo {
-  static const kContacts = const <Contact>[
-    const Contact(
-        fullName: 'Romain Hoogmoed', email: 'romain.hoogmoed@example.com'),
-    const Contact(fullName: 'Emilie Olsen', email: 'emilie.olsen@example.com')
-  ];
+  DataRepo _repo = Injector().contactRepository;
+
+//  static const _kRandomUserUrl = 'http://api.randomuser.me/?results=15';
+//  final JsonDecoder _decoder = new JsonDecoder();
 
   @override
   Future<List<Contact>> fetch() {
-    return Future.value(kContacts);
+    return _repo.fetch();
+//    return http.get(_kRandomUserUrl).then((http.Response response) {
+//      final String jsonBody = response.body;
+//      final statusCode = response.statusCode;
+//
+//      if (statusCode < 200 || statusCode >= 300 || jsonBody == null) {
+//        throw new FetchDataException(
+//            "Error while getting contacts [StatusCode:$statusCode, Error:${response.toString()}]");
+//      }
+//
+//      final contactsContainer = _decoder.convert(jsonBody);
+//      final List contactItems = contactsContainer['results'];
+//
+//      return contactItems
+//          .map((contactRaw) => new Contact.fromMap(contactRaw))
+//          .toList();
+//    });
   }
 }
